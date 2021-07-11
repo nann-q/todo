@@ -47,7 +47,6 @@ class TodoController extends Controller
         ];
         $this->validate($request,$validate_rule);
 
-        //DBに保存
         Content::create([
             'content'=>$request->content,
         ]);
@@ -55,11 +54,18 @@ class TodoController extends Controller
         return redirect('/');
     }
 
-    public function update(Request $request)
+    public function update(Content $id,Request $request)
     {
-        $content=new Content();
+        // error
+        $validate_rule=[
+            'content'=>'required|max:20',
+        ];
+        $this->validate($request,$validate_rule);
+
+        $content=new updateContent();
         $content->content=$request->content;
         $content->created_at=$request->created_at;
+        $content->save();
         return redirect('/');
     }
 

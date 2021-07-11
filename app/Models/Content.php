@@ -9,7 +9,16 @@ class Content extends Model
 {
     use HasFactory;
 
-    protected $guarded=[
-        'id'
+    protected $fillable=[
+        'content',
     ];
+
+    public function updateContent($content)
+    {
+        return $this->where([
+            'id'=>$content['id']
+        ])->update([
+            'content'=>$content['content'],
+        ]);
+    }
 }
