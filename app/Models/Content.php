@@ -13,12 +13,4 @@ class Content extends Model
         'content',
     ];
 
-    public function updateContent($content)
-    {
-        return $this->where([
-            'id'=>$content['id']
-        ])->update([
-            'content'=>$content['content'],
-        ]);
-    }
 }

@@ -52,9 +52,10 @@ class TodoController extends Controller
         ]);
 
         return redirect('/');
+
     }
 
-    public function update(Content $id,Request $request)
+    public function update(Request $request,$id)
     {
         // error
         $validate_rule=[
@@ -62,9 +63,9 @@ class TodoController extends Controller
         ];
         $this->validate($request,$validate_rule);
 
-        $content=new updateContent();
+
+        $content=Content::find($request->$id);
         $content->content=$request->content;
-        $content->created_at=$request->created_at;
         $content->save();
         return redirect('/');
     }
