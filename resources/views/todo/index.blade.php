@@ -191,41 +191,41 @@ table{
         <input type="text" name="content" class="content-create" >
         <input type="submit" value="追加" class="button-create">
       </form>
-      <table>
-        <tbody>
-          <tr>
-            <th>作成日</th>
-            <th>タスク名</th>
-            <th>更新</th>
-            <th>削除</th>
-          </tr>
-          @foreach($contents as $content)
-          <tr>
-            <td>
-            {{$content->created_at}}
-            </td>
-            <td>
-            <input type="text" name="content" class="content-control" value="{{$content->content}}">
-            </form>
-            </td>
-            <td>
-              <form action="{{url('/todo/update',$content->id)}}" method="post" >
+        <table>
+          <tbody>
+            <tr>
+              <th>作成日</th>
+              <th>タスク名</th>
+              <th>更新</th>
+              <th>削除</th>
+            </tr>
+            @foreach($contents as $content)
+            <tr>
+              <td>
+              {{$content->created_at}}
+              </td>
+              <form action="{{route('todo.update',$content->id)}}" method="post" >
               @csrf
               {{method_field('post')}}
-              <input type="submit" value="更新"class="button-update">
+              <td>
+                <input type="hidden" name="id" value="{$content->id}">
+                <input type="text" name="content" class="content-control" value="{{$content->content}}">
+              </td>
+              <td>
+                <input type="submit" value="更新"class="button-update">
+              </td>
               </form>
-            </td>
-            <td>
-              <form action="{{url('/todo/delete',$content->id)}}" method="post">
-              @csrf
-              {{method_field('post')}}
-              <input type="submit" value="削除" class="button-delete">
-              </form>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+              <td>
+                <form action="{{url('/todo/delete',$content->id)}}" method="post">
+                @csrf
+                {{method_field('post')}}
+                <input type="submit" value="削除" class="button-delete">
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
     </div>
   </div>
 </body>
